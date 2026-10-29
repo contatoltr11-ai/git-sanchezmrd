@@ -65,7 +65,7 @@ export default function Landing({ onNavigate }: LandingProps) {
 
                     {/* 2. SUB — o que ele vai descobrir */}
                     <p className="hero-sub">
-                        Responde 7 preguntas y te digo el <strong>próximo paso exacto</strong> para que ella vuelva a verte.
+                        Responde 6 preguntas y te digo el <strong>próximo paso exacto</strong> para que ella vuelva a verte.
                     </p>
 
                     {/* 3. CTA — o motor de conversão (urgência de tempo) */}
