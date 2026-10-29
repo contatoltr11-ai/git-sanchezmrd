@@ -73,7 +73,7 @@ export default function Landing({ onNavigate }: LandingProps) {
                         <button className="cta-button" onClick={handleCTAClick}>
                             <span className="cta-glow"></span>
                             <span className="cta-icon">⏰</span>
-                            <span className="cta-text">DESCUBRIR SI AÚN HAY TIEMPO</span>
+                            <span className="cta-text">DESCUBRIR EL PRÓXIMO PASO</span>
                         </button>
                         <p className="cta-micro">Haz el test rápido — 2 minutos y esto puede cambiar tu caso.</p>
                     </div>
