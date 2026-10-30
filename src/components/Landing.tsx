@@ -65,7 +65,7 @@ export default function Landing({ onNavigate }: LandingProps) {
 
                     {/* 2. SUB — o que ele vai descobrir */}
                     <p className="hero-sub">
-                        Responde 6 preguntas y te digo el <strong>próximo paso exacto</strong> para que ella vuelva a verte.
+                        Responde 7 preguntas y te digo el <strong>próximo paso exacto</strong> para que ella vuelva a verte.
                     </p>
 
                     {/* 3. CTA — o motor de conversão (urgência de tempo) */}
@@ -73,9 +73,9 @@ export default function Landing({ onNavigate }: LandingProps) {
                         <button className="cta-button" onClick={handleCTAClick}>
                             <span className="cta-glow"></span>
                             <span className="cta-icon">⏰</span>
-                            <span className="cta-text">DESCUBRIR EL PRÓXIMO PASO</span>
+                            <span className="cta-text">DESCUBRIR SI AÚN HAY TIEMPO</span>
                         </button>
-                        <p className="cta-micro">2 minutos · 100% anónimo</p>
+                        <p className="cta-micro">Haz el test rápido — 2 minutos y esto puede cambiar tu caso.</p>
                     </div>
                 </main>
 
@@ -158,7 +158,7 @@ export default function Landing({ onNavigate }: LandingProps) {
                 .hero-sub {
                     font-size: 1.1rem;
                     line-height: 1.55;
-                    color: rgba(255, 255, 255, 0.92);
+                    color: rgba(255, 255, 255, 0.78);
                     max-width: 520px;
                     margin: 0;
                 }
