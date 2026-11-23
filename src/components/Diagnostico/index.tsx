@@ -82,11 +82,7 @@ export default function Diagnostico({ sectionRef, fadeOutPhase, buttonChecked, o
             ref={sectionRef} 
             className={`revelation fade-in diag4-root ${fadeOutPhase === 1 ? 'fade-out' : ''}`}
         >
-            {/* Mecanismo v2 (18/11/2026): alerta + medidor de probabilidade */}
-            <div style={{ background: '#dc2626', color: 'white', borderRadius: '12px', padding: '12px 14px', textAlign: 'center', margin: '0 0 16px' }}>
-                <p style={{ fontWeight: 900, fontSize: 'clamp(1.05rem, 4.6vw, 1.25rem)', margin: 0, letterSpacing: '0.02em' }}>¡NO SALGAS DE ESTA PÁGINA!</p>
-                <p style={{ fontSize: 'clamp(0.9rem, 3.6vw, 1rem)', margin: '4px 0 0', opacity: 0.95 }}>Lee hasta el final. Lo que sigue es tu caso.</p>
-            </div>
+            {/* Enxuto 23/11 (reconquistaprp): sai a faixa "¡NO SALGAS!"; fica o medidor de probabilidade */}
             <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '14px', padding: '16px', margin: '0 0 20px', textAlign: 'center' }}>
                 <p style={{ fontSize: 'clamp(0.8rem, 3.2vw, 0.9rem)', fontWeight: 800, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.75)', margin: 0 }}>PROBABILIDAD DE QUE VUELVA HOY</p>
                 <p style={{ fontSize: 'clamp(2.4rem, 11vw, 3rem)', fontWeight: 900, color: '#facc15', margin: '4px 0 8px', lineHeight: 1 }}>{probabilidad}%</p>
@@ -123,27 +119,7 @@ export default function Diagnostico({ sectionRef, fadeOutPhase, buttonChecked, o
 
                 {d.verguenza && <p className="diag4-quote">{d.verguenza}</p>}
 
-                <div className="diag4-card">
-                    <p className="diag4-label">🧠 Lo que nadie te explicó</p>
-                    <p className="diag4-p">{d.harvard}</p>
-                    <img src="/img/sophia-harvard.webp" alt="Sophia Sanchez en Harvard" width={1000} height={800} loading="lazy" className="diag4-img" />
-                </div>
-
-                <p className="diag4-p diag4-strong">{d.dorFrase}</p>
-                <div className="diag4-chem">
-                    <div className="diag4-chem-row">
-                        <span className="diag4-chem-ico">🧡</span>
-                        <span className="diag4-chem-name"><b>Oxitocina</b><br/>el cariño</span>
-                        <span className="diag4-chem-ok">✅ sigue ahí</span>
-                    </div>
-                    <div className="diag4-chem-row">
-                        <span className="diag4-chem-ico">⚡</span>
-                        <span className="diag4-chem-name"><b>Dopamina</b><br/>las ganas</span>
-                        <span className="diag4-chem-off">{quizData.currentSituation === 'ENCUENTROS ÍNTIMOS' ? '⚠️ van y vienen' : '❌ se apagó'}</span>
-                    </div>
-                </div>
-                <p className="diag4-p diag4-green">{quizData.currentSituation === 'ENCUENTROS ÍNTIMOS' ? 'Y las ganas pueden volver a quedarse.' : 'Y las ganas se vuelven a encender.'}</p>
-
+                {/* Enxuto 23/11 (reconquistaprp): saíram o bloco de Harvard (fica na landing/sanchezmrd) e o cartão oxitocina/dopamina */}
                 {d.enTuCaso && (
                     <div className="diag4-card">
                         <p className="diag4-label">📍 En tu caso</p>
@@ -158,7 +134,7 @@ export default function Diagnostico({ sectionRef, fadeOutPhase, buttonChecked, o
                 </div>
 
                 <p className="diag4-p">Eso es la <strong>Obsesión Inversa</strong>: {(quizData.impulso || '').startsWith('NO HICE') ? 'dejas de esperarla en silencio' : 'dejas de perseguirla tú'}, y es su cerebro el que empieza a buscarte.</p>
-                <p className="diag4-warn">⚠️ Pero cuidado: mal usado, la aleja para siempre. Por eso, antes de tu Ventana, escucha a Sophia.</p>
+                <p className="diag4-warn">⚠️ Pero cuidado: mal usado, la aleja para siempre.</p>
             </div>
             <style>{`
                 .diag4-root, .diag4-root * { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }

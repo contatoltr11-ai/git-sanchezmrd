@@ -203,7 +203,8 @@ export default function Chat({ onNavigate }: ChatProps) {
     // Antes: 2 balões (9.000 hombres + 6 preguntas) → opções em ~6,8 s; agora ~3,9 s. Ver expert-lucas/copies/chat-abertura-v5.md
     const intro: Message = {
       type: 'bot',
-      text: 'Hola, soy Sophia. Esa región de su cerebro se puede volver a encender. Con 6 respuestas te digo cómo hacerlo en tu caso.',
+      // reconquistaprp 23/11: abertura sem "esa región de su cerebro" (a landing daqui é a "bueno, paciente", não a Harvard)
+      text: 'Hola, soy Sophia. Con 6 respuestas te digo qué hacer y, sobre todo, cuándo hacerlo en tu caso.',
       isTyping: true,
     };
     setMessages([intro]);

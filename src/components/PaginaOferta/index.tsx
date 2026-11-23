@@ -22,7 +22,6 @@ export default function PaginaOferta({
     offerTimeLeft,
     offerTimerStage,
     spotsLeft,
-    peopleBuying,
     selectedPlan,
     setSelectedPlan,
     onCTAClick,
@@ -233,7 +232,6 @@ export default function PaginaOferta({
 
     // Etapa 3A (19/11): escassez, bônus do caso primeiro, prova perto do preço, FAQ do caso primeiro
     const probabilidad = getProbabilidad(quizData);
-    const cuposSophia = Math.max(3, Math.round((spotsLeft || 50) / 4));
     // Oferta v4 (22/11): Reset del Ancla voltou para o Esencial; entram 3 mensajes listos e Regalo sorpresa.
     // Ordem: protocolo do caso (= Protocolo de Emergencia) → mensajes → decodificador → outros protocolos → círculo → regalo
     const protocolos = [
@@ -246,7 +244,7 @@ export default function PaginaOferta({
         ...protocolos.filter(b => b.k === casoKey),
         { k: 'msgs', n: '3 mensajes listos de tu disparador para la Fase 1 (qué mandarle y en qué momento)', v: 37 },
         { k: 'deco', n: 'Decodificador: las 12 frases que ella dice y lo que de verdad significan', v: 37 },
-        ...protocolos.filter(b => b.k !== casoKey),
+        { k: 'otros', n: 'Los otros 2 protocolos, por si tu situación cambia: ' + protocolos.filter(b => b.k !== casoKey).map(b => b.n.split(':')[0]).join(' y '), v: protocolos.filter(b => b.k !== casoKey).reduce((t, b) => t + b.v, 0) },
         { k: 'circulo', n: 'Círculo privado de hombres en tu misma situación', v: 67 },
         { k: 'regalo', n: 'Regalo sorpresa (lo abres al entrar)', v: 97 },
     ];
@@ -315,13 +313,7 @@ export default function PaginaOferta({
 
                 {miedoEco && <p className="of4-quote">{miedoEco}</p>}
 
-                <div className="of4-rows">
-                    <div className="of4-row"><span>✅</span><span>Ya sabes por qué se alejó: <b>el cariño sigue ahí, las ganas se apagaron.</b></span></div>
-                    <div className="of4-row"><span>✅</span><span>Ya sabes tu disparador clave: <b className="of4-yellow">{disparadorClave.nombre}</b></span></div>
-                    <div className="of4-row"><span>✅</span><span>Tu probabilidad hoy: <b className="of4-yellow">{probabilidad}%</b> · con tu disparador activado: <b>hasta 87%</b>.</span></div>
-                    <div className="of4-row"><span>✅</span><span>Ya viste cómo cambia su cerebro en la Ventana de 72 horas.</span></div>
-                </div>
-
+                {/* Enxuto 23/11 (reconquistaprp): saiu o resumo de 4 ✅ (probabilidade e disparador já aparecem na linha do tempo) */}
                 <p className="of4-p" style={{ marginBottom: 4 }}>Ahora falta lo más importante:</p>
                 <p className="of4-green-lead">saber exactamente qué hacer en cada fase para volver a encender sus ganas, en tu caso.</p>
             </div>
@@ -699,7 +691,7 @@ export default function PaginaOferta({
                         <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/>
                         <path fill="#fff" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/>
                     </svg>
-                    <span>Sophia te escribe personalmente para conocer tu caso<br/><span style={{ color: '#facc15', fontWeight: 800 }}>Solo 20 hombres por día: hoy quedan {cuposSophia}</span></span>
+                    <span>Sophia te escribe personalmente para conocer tu caso<br/><span style={{ color: '#facc15', fontWeight: 800 }}>Solo 20 hombres por día</span></span>
                 </div>
                 <div style={{ fontSize: 'clamp(0.9rem, 3.5vw, 1.05rem)', color: 'rgba(255,255,255,0.7)' }}>Garantía de 90 días</div>
                 <div style={{ fontSize: 'clamp(0.85rem, 3.3vw, 0.95rem)', color: 'rgba(255,255,255,0.6)' }}>Actualizaciones de por vida <span style={{ color: '#facc15', fontWeight: '700' }}>· De $47 a GRATIS</span></div>
@@ -1045,7 +1037,7 @@ export default function PaginaOferta({
                         marginBottom: 'clamp(10px, 2.5vw, 12px)',
                         textAlign: 'left'
                     }}>
-                        Las 3 fases empiezan en 72 horas, pero el cerebro de ella no cambia de un día para otro: primero vuelve la curiosidad, después el cariño y al final las ganas. Por eso no te doy 7 días. Te doy 90.
+                        Tu plan está hecho para que ella dé el paso en los primeros 7 días. Igual te doy 90 días para comprobarlo.
                     </p>
                     <p style={{
                         fontSize: 'clamp(0.95rem, 3.8vw, 1.15rem)',
@@ -1110,6 +1102,7 @@ export default function PaginaOferta({
                         gap: 'clamp(10px, 2.5vw, 14px)'
                     }}>
                         {/* Mecanismo v2: FAQ com nomes (Martín, Esteban, Marcos; ids internos rafael/silvio/tiago mantidos) */}
+                        {faqPrimero === 'rafael' && (
                         <details open={faqPrimero === 'rafael'} style={{ order: faqPrimero === 'rafael' ? -1 : 0,
                             background: 'rgba(234, 179, 8, 0.1)',
                             borderLeft: '4px solid #eab308',
@@ -1135,6 +1128,8 @@ export default function PaginaOferta({
                                 <strong style={{ color: '#4ade80' }}>✅ Funciona, Martín.</strong> El bloqueo es su lado racional defendiéndose. Tu plan no empieza con mensajes: ella nota el cambio por lo que ve de ti. Y te dice cuándo y cómo reaparecer cuando te desbloquee.
                             </p>
                         </details>
+                        )}
+                        {faqPrimero === 'silvio' && (
                         <details open={faqPrimero === 'silvio'} style={{ order: faqPrimero === 'silvio' ? -1 : 0,
                             background: 'rgba(234, 179, 8, 0.1)',
                             borderLeft: '4px solid #eab308',
@@ -1160,6 +1155,8 @@ export default function PaginaOferta({
                                 <strong style={{ color: '#4ade80' }}>Es el mejor momento, Esteban.</strong> Las primeras semanas son cuando más hombres hunden el Ancla del Dolor: ruegan, mandan textos largos, regalos. Quien empieza ahora, empieza antes de arruinarlo.
                             </p>
                         </details>
+                        )}
+                        {faqPrimero === 'marcos' && (
                         <details open={faqPrimero === 'marcos'} style={{ order: faqPrimero === 'marcos' ? -1 : 0,
                             background: 'rgba(234, 179, 8, 0.1)',
                             borderLeft: '4px solid #eab308',
@@ -1185,7 +1182,9 @@ export default function PaginaOferta({
                                 <strong style={{ color: '#4ade80' }}>No, Marcos.</strong> Lo que vivieron no se borra en unos meses. Lo que cambia es el primer paso, y tu plan te dice exactamente cuál es en tu caso.
                             </p>
                         </details>
+                        )}
                         {/* Pergunta 1 */}
+                        {faqPrimero === 'tiago' && (
                         <details open={faqPrimero === 'tiago'} style={{ order: faqPrimero === 'tiago' ? -1 : 0,
                             background: 'rgba(234, 179, 8, 0.1)',
                             borderLeft: '4px solid #eab308',
@@ -1212,6 +1211,7 @@ export default function PaginaOferta({
                                 y el Protocolo La Pérdida (si ya está con otro) te dice qué hacer y qué no, para no empujarla más hacia él.
                             </p>
                         </details>
+                        )}
 
                         {/* Pergunta 2 */}
                         <details style={{
@@ -1272,6 +1272,7 @@ export default function PaginaOferta({
                         )}
 
                         {/* Pergunta 3 (NOVA) */}
+                        {faqPrimero === 'jorge' && (
                         <details open={faqPrimero === 'jorge'} style={{ order: faqPrimero === 'jorge' ? -1 : 0,
                             background: 'rgba(234, 179, 8, 0.1)',
                             borderLeft: '4px solid #eab308',
@@ -1297,6 +1298,7 @@ export default function PaginaOferta({
                                 <strong style={{ color: '#4ade80' }}>✅ Sí, Jorge.</strong> Es de los casos más comunes. El Plan Completo incluye el Protocolo Mismo Techo, solo para cuando la ves todos los días y no puedes desaparecer.
                             </p>
                         </details>
+                        )}
 
                         {/* Pergunta 4 (NOVA) */}
                         <details style={{
@@ -1350,56 +1352,8 @@ export default function PaginaOferta({
                                 <strong style={{ color: '#4ade80' }}>Porque todo lo que probaste le habló a su lado racional</strong>: cartas, disculpas, contacto cero. Este plan le habla al lado que decide de quién se enamora. Y no está pensado para chicos de 20 años: parte de tu caso, de lo que respondiste y de en qué punto están hoy.
                             </p>
                         </details>
-                        <details style={{
-                            background: 'rgba(234, 179, 8, 0.1)',
-                            borderLeft: '4px solid #eab308',
-                            padding: 'clamp(14px, 3.5vw, 16px)',
-                            borderRadius: '8px',
-                            cursor: 'pointer'
-                        }}>
-                            <summary style={{
-                                fontSize: 'clamp(1rem, 4vw, 1.15rem)',
-                                color: '#facc15',
-                                fontWeight: '700',
-                                cursor: 'pointer',
-                                listStyle: 'none'
-                            }}>
-                                ¿Cuánto tiempo al día me lleva?
-                            </summary>
-                            <p style={{
-                                fontSize: 'clamp(0.95rem, 3.8vw, 1.05rem)',
-                                color: 'rgba(255,255,255,0.9)',
-                                marginTop: 'clamp(12px, 3vw, 16px)',
-                                lineHeight: '1.6'
-                            }}>
-                                <strong style={{ color: '#4ade80' }}>Unos 10 minutos.</strong> Tu plan te dice qué hacer hoy y qué no hacer. No tienes que escribirle textos largos ni estudiar horas.
-                            </p>
-                        </details>
-                        <details style={{
-                            background: 'rgba(234, 179, 8, 0.1)',
-                            borderLeft: '4px solid #eab308',
-                            padding: 'clamp(14px, 3.5vw, 16px)',
-                            borderRadius: '8px',
-                            cursor: 'pointer'
-                        }}>
-                            <summary style={{
-                                fontSize: 'clamp(1rem, 4vw, 1.15rem)',
-                                color: '#facc15',
-                                fontWeight: '700',
-                                cursor: 'pointer',
-                                listStyle: 'none'
-                            }}>
-                                ¿Ella se va a enterar?
-                            </summary>
-                            <p style={{
-                                fontSize: 'clamp(0.95rem, 3.8vw, 1.05rem)',
-                                color: 'rgba(255,255,255,0.9)',
-                                marginTop: 'clamp(12px, 3vw, 16px)',
-                                lineHeight: '1.6'
-                            }}>
-                                <strong style={{ color: '#4ade80' }}>No.</strong> Tu plan se abre en tu celular, con tu acceso. Ella solo ve el cambio en ti.
-                            </p>
-                        </details>
+
+
                     </div>
                 </div>
 
@@ -1495,10 +1449,7 @@ export default function PaginaOferta({
                         fontWeight: '700',
                         margin: 0
                     }}>
-                        Más de 9.000 hombres acompañados<br/>
-                        <span style={{ fontSize: 'clamp(0.8rem, 3vw, 0.95rem)', opacity: 0.8 }}>
-                            ✨ {peopleBuying} {peopleBuying === 1 ? 'persona' : 'personas'} comprando ahora
-                        </span>
+                        Más de 9.000 hombres acompañados
                     </p>
                 </div>
 
